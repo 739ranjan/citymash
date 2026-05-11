@@ -19,6 +19,10 @@ const smtpUser = process.env.SMTP_USER || "";
 const smtpPass = process.env.SMTP_PASS || "";
 const contactToEmail = process.env.CONTACT_TO_EMAIL || process.env.SMTP_USER || "";
 const contactFromEmail = process.env.CONTACT_FROM_EMAIL || smtpUser || "";
+const smtpConnectionTimeoutMs = Number(process.env.SMTP_CONNECTION_TIMEOUT_MS || 8000);
+const smtpGreetingTimeoutMs = Number(process.env.SMTP_GREETING_TIMEOUT_MS || 8000);
+const smtpSocketTimeoutMs = Number(process.env.SMTP_SOCKET_TIMEOUT_MS || 10000);
+const smtpSendTimeoutMs = Number(process.env.SMTP_SEND_TIMEOUT_MS || 12000);
 
 const transport =
   smtpHost && smtpPort && smtpUser && smtpPass
@@ -26,6 +30,9 @@ const transport =
         host: smtpHost,
         port: smtpPort,
         secure: smtpSecure,
+        connectionTimeout: smtpConnectionTimeoutMs,
+        greetingTimeout: smtpGreetingTimeoutMs,
+        socketTimeout: smtpSocketTimeoutMs,
         auth: {
           user: smtpUser,
           pass: smtpPass,
@@ -74,6 +81,31 @@ function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+function summarizeSmtpConfig() {
+  return {
+    smtpHost,
+    smtpPort,
+    smtpSecure,
+    smtpUser,
+    contactFromEmail,
+    contactToEmail,
+    transportConfigured: Boolean(transport),
+    smtpConnectionTimeoutMs,
+    smtpGreetingTimeoutMs,
+    smtpSocketTimeoutMs,
+    smtpSendTimeoutMs,
+  };
+}
+
+function withTimeout(promise, timeoutMs, message) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => {
+      setTimeout(() => reject(new Error(message)), timeoutMs);
+    }),
+  ]);
+}
+
 async function readRequestBody(request) {
   const chunks = [];
   for await (const chunk of request) {
@@ -101,6 +133,7 @@ async function handleContact(request, response) {
   }
 
   if (!transport || !contactToEmail || !contactFromEmail) {
+    console.error("SMTP configuration missing:", summarizeSmtpConfig());
     sendJson(response, 500, { message: "SMTP is not configured on the server." });
     return;
   }
@@ -154,21 +187,41 @@ async function handleContact(request, response) {
       </div>
     `;
 
-    await transport.sendMail({
-      to: contactToEmail,
-      from: contactFromEmail,
-      replyTo: email,
-      subject,
-      text,
-      html,
+    const result = await withTimeout(
+      transport.sendMail({
+        to: contactToEmail,
+        from: contactFromEmail,
+        replyTo: email,
+        subject,
+        text,
+        html,
+      }),
+      smtpSendTimeoutMs,
+      `SMTP send timed out after ${smtpSendTimeoutMs}ms`,
+    );
+
+    console.log("Contact enquiry sent:", {
+      messageId: result.messageId,
+      accepted: result.accepted,
+      rejected: result.rejected,
     });
 
     sendJson(response, 200, {
       message: "Thanks. The CityMash team will get back to you shortly.",
     });
   } catch (error) {
-    console.error("Contact form submission failed:", error);
-    sendJson(response, 500, { message: "Unable to send enquiry right now." });
+    console.error("Contact form submission failed:", {
+      error: error instanceof Error ? error.message : error,
+      code: error && typeof error === "object" && "code" in error ? error.code : undefined,
+      command: error && typeof error === "object" && "command" in error ? error.command : undefined,
+      smtp: summarizeSmtpConfig(),
+    });
+    sendJson(response, 500, {
+      message:
+        error instanceof Error && error.message.includes("timed out")
+          ? "Mail server connection timed out. Check SMTP access or hosting restrictions."
+          : "Unable to send enquiry right now.",
+    });
   }
 }
 

@@ -98,7 +98,6 @@ export function ContactSection() {
       setForm(initialForm);
     } catch (error) {
       setStatus("error");
-      console.log("=============> "+ error)
       setNotice(
         error instanceof Error && error.name === "AbortError"
           ? "Contact server did not respond. Please try again in a few minutes or call CityMash directly."
