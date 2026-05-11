@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="CityMash">
+  <rect width="64" height="64" rx="14" fill="#0f766e" />
+  <path d="M15 50V23l12-9 10 7v29h-7V28l-5-3v25h-5V31l-5 4v15h-5Z" fill="#ffffff" />
+  <path d="M36 50V14l17 13-4 23h-6V28l-5-3v25h-2Z" fill="#1f2937" />
+  <path d="M22 21h5v6h-5zM22 31h5v6h-5zM39 24l5 2v6l-5-2zM39 35l5 2v6l-5-2z" fill="#f59e0b" />
+  <path d="M8 54h48" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+</svg>

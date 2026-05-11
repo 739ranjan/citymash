@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 321 490" role="img" aria-labelledby="title desc">
+  <title id="title">CityMash Properties</title>
+  <desc id="desc">CityMash Properties logo with high-rise buildings, vertical MASH lettering, and the tagline You Dream We Create.</desc>
+  <g fill="#2b2b2b">
+    <path d="M28 130 88 88l6 257H50L28 130Z" />
+    <path d="M96 95 146 130 126 345h-22L96 95Z" />
+    <path d="M113 56 183 0l2 345h-36l-3-217-25-14-7 231h-24L113 56Z" />
+    <path d="M188 3 256 59 235 345h-33L188 3Z" />
+    <path d="M238 150 312 116v229h-57L238 150Z" />
+  </g>
+
+  <g fill="#eeeeee">
+    <path d="M78 127h8v219h-8z" />
+    <path d="M103 126l11 4-1 20-10-4z" />
+    <path d="M104 154l11 4-1 19-10-4z" />
+    <path d="M105 182l11 4-1 19-10-4z" />
+    <path d="M106 210l11 4-1 19-10-4z" />
+    <path d="M107 238l11 4-1 19-10-4z" />
+    <path d="M108 266l11 4-1 19-10-4z" />
+    <path d="M109 294l11 4-1 18-10-4z" />
+    <path d="M111 321l11 4-1 18-10-4z" />
+    <path d="M132 64l15-5v21l-13 4z" />
+    <path d="M159 51l14-5v22l-14 5z" />
+    <path d="M132 98l14-5v22l-13 5z" />
+    <path d="M159 84l14-5v23l-14 5z" />
+    <path d="M132 133l14-6v22l-13 5z" />
+    <path d="M159 118l14-5v23l-14 5z" />
+    <path d="M132 168l14-6v22l-13 5z" />
+    <path d="M159 153l14-5v23l-14 5z" />
+    <path d="M132 203l14-6v22l-13 5z" />
+    <path d="M159 188l14-5v23l-14 5z" />
+    <path d="M132 238l14-6v22l-13 5z" />
+    <path d="M159 223l14-5v23l-14 5z" />
+    <path d="M132 273l14-6v22l-13 5z" />
+    <path d="M159 258l14-5v23l-14 5z" />
+    <path d="M132 308l14-6v22l-13 5z" />
+    <path d="M159 293l14-5v23l-14 5z" />
+    <path d="M203 47l14 8v22l-14-6z" />
+    <path d="M230 61l14 7-3 22-14-5z" />
+    <path d="M203 82l14 7v22l-14-6z" />
+    <path d="M228 96l14 6-2 22-14-5z" />
+    <path d="M203 117l14 7v22l-14-6z" />
+    <path d="M226 131l14 6-2 22-14-5z" />
+    <path d="M203 152l14 7v22l-14-6z" />
+    <path d="M224 166l14 6-2 22-14-5z" />
+    <path d="M203 187l14 7v22l-14-6z" />
+    <path d="M222 201l14 6-2 22-14-5z" />
+    <path d="M203 222l14 7v22l-14-6z" />
+    <path d="M220 236l14 6-2 22-14-5z" />
+    <path d="M203 257l14 7v22l-14-6z" />
+    <path d="M218 271l14 6-2 22-14-5z" />
+    <path d="M203 292l14 7v22l-14-6z" />
+    <path d="M216 306l14 6-2 22-14-5z" />
+  </g>
+
+  <text x="56" y="411" fill="#ffffff" font-family="Arial Black, Impact, sans-serif" font-size="66" font-weight="900" letter-spacing="2">CITY</text>
+  <text x="247" y="402" font-family="Arial Black, Impact, sans-serif" font-size="58" font-weight="900" letter-spacing="2" transform="rotate(-90 247 402)">
+    <tspan fill="#ec2aa3">M</tspan>
+    <tspan fill="#2458a7">A</tspan>
+    <tspan fill="#f17c2c">S</tspan>
+    <tspan fill="#75c344">H</tspan>
+  </text>
+  <text x="48" y="454" fill="#2b2b2b" font-family="Arial Black, Arial, sans-serif" font-size="31" font-weight="900" letter-spacing="10">PROPERTIES</text>
+  <text x="57" y="482" fill="#000000" font-family="Arial, sans-serif" font-size="28" font-weight="900">You Dream We Create</text>
+</svg>
